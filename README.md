@@ -69,9 +69,8 @@ is present. This endpoint check if an order can be fulfiled using current stocks
 Continuous integration is setup on master branch using `Travis CI`. Once the build is successful, travis send the test coverage report to `Coverall` and also deploy the code to `Heroku`.
 
 ### Production details
-This app is deployed on `Heroku` platform. The base URL for application is `https://logistik-test.herokuapp.com`.
-To access Swagger UI for custom enpoint use `https://logistik-test.herokuapp.com/apidocs`. To access schema endpoint
-for CRUD API use `https://logistik-test.herokuapp.com/swagger.json`.
+This app is deployed on `Heroku` platform. The access application use [Base Url](https://logistik-test.herokuapp.com).
+To access Swagger UI for custom enpoint use [Swagger UI](https://logistik-test.herokuapp.com/apidocs). To access schema endpoint for CRUD API use [Schema Endpoint](https://logistik-test.herokuapp.com/swagger.json).
 
 ### Tech-stack used
 
