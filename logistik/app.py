@@ -1,17 +1,18 @@
+import os
 from flask import Flask
-from flask_restless import url_for
 from flask_restless import APIManager
 from .extentions import db, migrate, api_manager
 from .views import blueprints, BASE_PREFIX
 from .models import all_models
 
-def init_app(config):
+def init_app():
   """
   Function to initilize Flask app and register
   extentions.
   """
   app = Flask(__name__)
-  app.config.from_object(config)
+  settings = os.environ.get("FLASK_SETTING_MODULE", 'logistik.logistik.settings.DevelopmentSettings')
+  app.config.from_object(settings)
   register_crud_api(app)
   register_extensions(app)
   register_blueprints(app)
