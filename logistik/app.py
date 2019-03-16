@@ -15,7 +15,7 @@ def init_app():
     """
     app = Flask(__name__)
     settings = os.environ.get("FLASK_SETTING_MODULE",
-                              'logistik.logistik.settings.DevelopmentSettings')
+                              'logistik.settings.DevelopmentSettings')
     app.config.from_object(settings)
     register_crud_api(app)
     register_extensions(app)

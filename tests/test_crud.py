@@ -1,6 +1,6 @@
 from flask_restless import url_for
 
-from ..logistik.models import Order
+from logistik.models import Order
 
 
 def test_create_order(webapp):

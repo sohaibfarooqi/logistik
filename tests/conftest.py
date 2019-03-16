@@ -1,7 +1,7 @@
 import pytest
 
-from ..logistik.app import db, init_app
-from ..logistik.models import Order, OrderLine, Sku, Storage
+from logistik.app import db, init_app
+from logistik.models import Order, OrderLine, Sku, Storage
 
 
 def create_model_obj(model, kwargs):
