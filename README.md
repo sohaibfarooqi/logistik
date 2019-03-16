@@ -68,6 +68,11 @@ is present. This endpoint check if an order can be fulfiled using current stocks
 ### Deployments
 Continuous integration is setup on master branch using `Travis CI`. Once the build is successful, travis send the test coverage report to `Coverall` and also deploy the code to `Heroku`.
 
+### Production details
+This app is deployed on `Heroku` platform. The base URL for application is `https://logistik-test.herokuapp.com`.
+To access Swagger UI for custom enpoint use `https://logistik-test.herokuapp.com/apidocs`. To access schema endpoint
+for CRUD API use `https://logistik-test.herokuapp.com/swagger.json`.
+
 ### Tech-stack used
 
   - Python 3.5
@@ -81,8 +86,10 @@ Continuous integration is setup on master branch using `Travis CI`. Once the bui
   - Autopep8
   - Isort
 
+The reason to choose above stack is as follows:
+
   - This app is build on Flask framework. Flask is a microframework with easy to plug third party extentions on demand.
-  This makes this framework very powerful yet lightweight.
+    This makes this framework very powerful yet lightweight.
   - Datastore for this app on production is PostgreSQL. PostgreSQL is a SQL complaint database with ACID support.
   It also offers several extentions which comes very useful in special usecases e.g PostGIS, Unaccent, Ltree etc.
   - Gunicorn is a powerful production ready container for python web apps.
