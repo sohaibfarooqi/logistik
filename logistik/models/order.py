@@ -11,8 +11,6 @@ class Order(Base):
     Class definition for Order. Contains attributes associated with order,
     `customer_name`, `order_lines`.
     """
-    _exclude = ()
-
     customer_name = db.Column(db.String, nullable=False)
     order_lines = db.relationship(
         'OrderLine', lazy=True, cascade="all, delete-orphan")
