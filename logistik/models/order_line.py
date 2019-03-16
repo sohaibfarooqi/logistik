@@ -7,6 +7,7 @@ class OrderLine(Base):
   its associated sku and quantity
   """
   sku_id = db.Column(db.Integer, db.ForeignKey('sku.id'), nullable=False)
-  sku = db.relationship('Sku', backref='orderlines')
+  sku = db.relationship('Sku', backref='skus')
   quantity = db.Column(db.Integer, nullable=False)
   order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
+  order = db.relationship('Order', backref='order')
