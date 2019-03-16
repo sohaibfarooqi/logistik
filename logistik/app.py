@@ -41,6 +41,3 @@ def register_crud_api(app):
   http_methods = ('GET', 'POST', 'PUT', 'DELETE',)
   for model in all_models:
     api_manager.create_api(model, methods=http_methods, url_prefix=BASE_PREFIX)
-
-
-
