@@ -16,7 +16,7 @@ def fulfill_order(order_id):
 
   Example Invokcation:
   --------------------
-    - /api/v1.1/order/1/fulfill
+    - /api/v1.0/order/1/fulfill
 
   Response:
   ---------
