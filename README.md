@@ -1,6 +1,7 @@
-# Logistik
+# Logistik [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-[![Build Status](https://travis-ci.org/sohaibfarooqi/logistik.svg?branch=master)](https://travis-ci.org/sohaibfarooqi/logistik) [![Coverage Status](https://coveralls.io/repos/github/sohaibfarooqi/logistik/badge.svg?branch=master)](https://coveralls.io/github/sohaibfarooqi/logistik?branch=master) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Build Status](https://travis-ci.org/sohaibfarooqi/logistik.svg?branch=master)](https://travis-ci.org/sohaibfarooqi/logistik) [![Coverage Status](https://coveralls.io/repos/github/sohaibfarooqi/logistik/badge.svg?branch=master)](https://coveralls.io/github/sohaibfarooqi/logistik?branch=master)
+
 
 This app provides CRUD endpoints for logistics management. Moreover, It also provides an special endpoint
 to check if an particular order can be fulfiled.
@@ -69,23 +70,35 @@ Continuous integration is setup on master branch using `Travis CI`. Once the bui
 
 ### Tech-stack used
 
- - Python 3.5
- - Flask
- - SQLALchemy
- - PostgreSQL
- - Gunicorn
- - Pytest
- - Swagger
- - Bandit
- - Autopep8
- - Isort
+  - Python 3.5
+  - Flask
+  - SQLALchemy
+  - PostgreSQL
+  - Gunicorn
+  - Pytest
+  - Swagger
+  - Bandit
+  - Autopep8
+  - Isort
 
- - This app is build on Flask framework. Flask is a microframework with easy to plug third party extentions on demand.
-   This makes this framework very powerful yet lightweight.
- - Datastore for this app on production is PostgreSQL. PostgreSQL is a SQL complaint database with ACID support.
-   It also offers several extentions which comes very useful in special usecases e.g PostGIS, Unaccent, Ltree etc.
- - Gunicorn is a powerful production ready container for python web apps.
- - Swagger is a convenient API docs generator which is very helpful for end users to interact with.
- - Bandit is a code audit library, Autopep8 is for PEP8 adherence, Isort is to organize import files.
+  - This app is build on Flask framework. Flask is a microframework with easy to plug third party extentions on demand.
+  This makes this framework very powerful yet lightweight.
+  - Datastore for this app on production is PostgreSQL. PostgreSQL is a SQL complaint database with ACID support.
+  It also offers several extentions which comes very useful in special usecases e.g PostGIS, Unaccent, Ltree etc.
+  - Gunicorn is a powerful production ready container for python web apps.
+  - Swagger is a convenient API docs generator which is very helpful for end users to interact with.
+  - Bandit is a code audit library, Autopep8 is for PEP8 adherence, Isort is to organize import files.
 
 ### Further Improvements
+
+ - Add more test cases.
+ - Create meaningful indexes for query optimization.
+ - Add schema validation support with `Marshmallow`.
+ - Run load test to plan capacity of system. Load testing can be done using `Apache Workbench`.
+ - Package application using Docker.
+ - Add authentication support to prevent unauthorized access.
+ - Implement database agonistic unaccented seach. To approach this, first create a new column
+   which will store the `customer_name` unaccented using python package `unicodedata`. All the search
+   will be done on this column instead of original column. There is also a PostgreSQL extention `unaccent`
+   which can be used in this situation. But this will create dependency on PostgreSQL and this extention search
+   with ignore case.
