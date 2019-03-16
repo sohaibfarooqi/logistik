@@ -3,7 +3,7 @@ from .order_line import OrderLine
 from .sku import Sku
 from .storage import Storage
 from ..extentions import db
-from ..exceptions import InsufficientStockError
+from ..exceptions import InsufficientStockError, OrderNotFoundError
 
 class Order(Base):
     """
@@ -11,7 +11,7 @@ class Order(Base):
     `customer_name`, `order_lines`.
     """
     customer_name = db.Column(db.String, nullable=False)
-    order_lines = db.relationship('OrderLine', lazy=True)
+    order_lines = db.relationship('OrderLine', lazy=True, cascade="all, delete-orphan")
 
     @classmethod
     def fulfill(cls, order_id):
@@ -26,6 +26,9 @@ class Order(Base):
         """
         order = cls.query.join(OrderLine, OrderLine.order_id==Order.id).join(Sku, OrderLine.sku_id==Sku.id).join(Storage, Sku.storages).filter(OrderLine.order_id==order_id).first()
         result = list()
+
+        if not order:
+            raise OrderNotFoundError(order_id)
 
         # Iterate over each order line
         for item in order.order_lines:
