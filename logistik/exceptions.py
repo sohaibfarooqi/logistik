@@ -4,6 +4,19 @@ class AppException(Exception):
   """
   pass
 
+class OrderNotFoundError(AppException):
+  """
+  Error raised when requested order not found in the system.
+  """
+  def __init__(self, order):
+    self.order = order
+
+  def to_response(self):
+    return {
+      "error": "Order not found",
+       "order_id": self.order
+    }
+
 class InsufficientStockError(AppException):
   """
   Error raised when there is not enough quantity in
