@@ -47,5 +47,6 @@ def register_crud_api(app):
     """
     http_methods = ('GET', 'POST', 'PUT', 'DELETE',)
     for model in all_models:
+        exclude = model._exclude
         api_manager.create_api(
-            model, methods=http_methods, url_prefix=BASE_PREFIX)
+            model, methods=http_methods, url_prefix=BASE_PREFIX, exclude_columns=exclude)
