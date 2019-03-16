@@ -17,7 +17,7 @@ class ProductionSettings(Settings):
     """
     Use this class to override any special settings for production
     """
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 
 class DevelopmentSettings(Settings):
