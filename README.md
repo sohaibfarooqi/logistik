@@ -1,6 +1,6 @@
 # Logistik
 
-[![Build Status](https://travis-ci.org/sohaibfarooqi/logistik.svg?branch=master)](https://travis-ci.org/sohaibfarooqi/logistik) [![Coverage Status](https://coveralls.io/repos/github/sohaibfarooqi/logistik/badge.svg?branch=master)](https://coveralls.io/github/sohaibfarooqi/logistik?branch=master)
+[![Build Status](https://travis-ci.org/sohaibfarooqi/logistik.svg?branch=master)](https://travis-ci.org/sohaibfarooqi/logistik) [![Coverage Status](https://coveralls.io/repos/github/sohaibfarooqi/logistik/badge.svg?branch=master)](https://coveralls.io/github/sohaibfarooqi/logistik?branch=master) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 This app provides CRUD endpoints for logistics management. Moreover, It also provides an special endpoint
 to check if an particular order can be fulfiled.
@@ -12,9 +12,20 @@ To run the app locally use following commands:
  - `virtualenv -p python3 env`
  - `source env/bin/activate`
  - `export FLASK_APP=wsgi.py`
- - `FLASK_RUN`
+ - `flask db migrate`
+ - `flask run`
 
 At this point you will have a copy of app running locally. Access the app at `http://localhost:5000/api/v1.0/order`
+To run test and generate coverage report use
+
+ - pytest
+ - pytest --cov=logistik tests/
+
+To run static analyzers use:
+
+ - bandit -r .
+ - autopep8 --recursive --in-place campaign
+ - isort **/*.py
 
 ### Data Model:
 This app contains following entities:
@@ -31,3 +42,50 @@ These entities are linked together with following relationships
  - An `OrderLine` can have at most one `Sku` and a `Sku` can be in `one-or-many` `OrderLine`(Many-to-One Relationship).
 
 Additionally all skus in an OrderLine must be unique.
+
+### CRUD Api
+The CRUD api is implemented using a popular open source project [Flask-Restless](https://github.com/jfinkels/flask-restless).
+It provides easy and elegant REST Api for SQLAlchemy models. Using this package following endpoints are exposed for all the
+models mentioned above
+
+ - `GET /<model>`
+ - `GET /<model>/id`
+ - `POST /<model>`
+ - `PUT /<model>/id`
+ - `DELETE /<model>/id`
+
+This package also support resource filtering. To get order based on customer name use following request:
+
+ - `order?filter[objects]=[{"name":"customer_name","op":"like","val":"Thomas"}]`
+
+Not only simple filtering, this package also supports SQL operators like `and`, `or`, `not` etc.
+
+### Custom Endpoints
+All custom endpoints are inside `logistik/views` directory. Currently only one endpoint i.e. `order/<order_id>/fulfill`
+is present. This endpoint check if an order can be fulfiled using current stocks in storage. If order can be fulfiled it returns `storage_id` and `quantity` supplied to fulfil the order. If an order cannot be fulfiled it returns 400.
+
+### Deployments
+Continuous integration is setup on master branch using `Travis CI`. Once the build is successful, travis send the test coverage report to `Coverall` and also deploy the code to `Heroku`.
+
+### Tech-stack used
+
+ - Python 3.5
+ - Flask
+ - SQLALchemy
+ - PostgreSQL
+ - Gunicorn
+ - Pytest
+ - Swagger
+ - Bandit
+ - Autopep8
+ - Isort
+
+ - This app is build on Flask framework. Flask is a microframework with easy to plug third party extentions on demand.
+   This makes this framework very powerful yet lightweight.
+ - Datastore for this app on production is PostgreSQL. PostgreSQL is a SQL complaint database with ACID support.
+   It also offers several extentions which comes very useful in special usecases e.g PostGIS, Unaccent, Ltree etc.
+ - Gunicorn is a powerful production ready container for python web apps.
+ - Swagger is a convenient API docs generator which is very helpful for end users to interact with.
+ - Bandit is a code audit library, Autopep8 is for PEP8 adherence, Isort is to organize import files.
+
+### Further Improvements
