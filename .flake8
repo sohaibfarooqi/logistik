@@ -1,0 +1,4 @@
+[flake8]
+exclude = */migrations/*, venv/*
+inline-quotes = single
+max-line-length = 79
