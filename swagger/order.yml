@@ -1,0 +1,30 @@
+Endpoint to support order fulfilment.
+---
+parameters:
+  - name: order_id
+    in: path
+    type: integer
+    required: true
+
+definitions:
+  orderLocation:
+    type: object
+    properties:
+      id:
+        type: integer
+      quantity:
+        type: integer
+
+responses:
+  200:
+    description: Target pick up location with quantity from each location.
+    schema:
+      $ref: '#/definitions/orderLocation'
+    examples:
+      [{'id': 1, "quantity": 10}, {'id': 2, "quantity": 5}]
+
+  400:
+    description: Cannot fulfill order insufficient stock/Unknown order id
+    examples:
+       - {"error": "Insufficient Stock", "sku": 1, "product_name": "Abc"}
+       - {"error": "Unknown Order", "order_id": 1}
