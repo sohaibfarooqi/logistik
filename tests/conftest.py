@@ -59,8 +59,8 @@ def order_multi(warehouse):
   order = create_model_obj(Order, {"customer_name": "John Doe"})
 
   order_line_1 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[0], "quantity": 5})
-  order_line_1 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[1], "quantity": 5})
-  order_line_1 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[2], "quantity": 6})
+  order_line_2 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[1], "quantity": 5})
+  order_line_3 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[2], "quantity": 6})
 
   yield order
 
@@ -73,8 +73,8 @@ def order_multi_error(warehouse):
   order = create_model_obj(Order, {"customer_name": "John Doe"})
 
   order_line_1 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[0], "quantity": 5})
-  order_line_1 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[1], "quantity": 5})
-  order_line_1 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[2], "quantity": 12})
+  order_line_2 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[1], "quantity": 5})
+  order_line_3 = create_model_obj(OrderLine, {"order": order, "sku": warehouse[2], "quantity": 12})
 
   yield order
 
