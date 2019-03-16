@@ -23,3 +23,11 @@ matrix:
   fast_finish: true
 
 cache: pip
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: KMbTALA8taVfoThlJd2qdamgcfMIOeUEx1BjGAEO5n87APnzY5OuxhEBtxMDh71Lc5bvJiGHa7avrIgsgPW9pPpAtl1p37BNfcKqF/az8PoOIIFCrafSH49imIxEcvRwvEneRFzwQ2KTJh0EoI6iRM+xEGlCQD5NkCHJCLlcJy5SdlUn5tCZRt8nZBUuWaj4mPO9SraZNOUaFaf9QqfmQfdvt9kpM6T/UzaIW++39UPM8c8ditRuB5TfdW6Od66cGmL+8cp4cUo1hFDd+EPu5dj16M2ii8J3bm/sMNNTCs68NO4oA9YSiIJ0YywPstEYJ7engaPAJ7Mo17iu5YGHZ+Hj4tSl/ZlZIvkvod/KriyQ/ILmXTJIp5yauzZ0ZNC7Dv/xFqDqZb8j1LhbH7rnjKeKWaWD6MvE2h1mwydiI8nvrwqC9EAPF1ySVUGXAtkJYsFgWx/KEvy3MTapK4XuScqCwOP16K+WddhUwZ4UtW7mc9oTE5nzY8DlgXBSZsuoToVAK6IPcCp2U7f58AQE83/wB6RycYHES3XWU2MTSS+AHryBvrVfE78cvkXqGY4jJUjbjYRiMLIs0sNBOlzMyCqszMXv/z3bz4YVGRVpmBIYtEW7CC12j2hUuwTa80kWfnOjdlnZvpv+es16LJtXXdK7uwU/fj3hCY8FMe6/tbQ=
+  app: logistik-test
+  on:
+    repo: sohaibfarooqi/logistik
