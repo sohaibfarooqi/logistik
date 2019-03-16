@@ -5,13 +5,15 @@ from .storage import Storage
 from ..extentions import db
 from ..exceptions import InsufficientStockError, OrderNotFoundError
 
+
 class Order(Base):
     """
     Class definition for Order. Contains attributes associated with order,
     `customer_name`, `order_lines`.
     """
     customer_name = db.Column(db.String, nullable=False)
-    order_lines = db.relationship('OrderLine', lazy=True, cascade="all, delete-orphan")
+    order_lines = db.relationship(
+        'OrderLine', lazy=True, cascade="all, delete-orphan")
 
     @classmethod
     def fulfill(cls, order_id):
@@ -24,7 +26,8 @@ class Order(Base):
         all order lines associated with Order. From OrderLine join on Sku to find all skus. From
         Sku join on storage to find the stocks in each storage.
         """
-        order = cls.query.join(OrderLine, OrderLine.order_id==Order.id).join(Sku, OrderLine.sku_id==Sku.id).join(Storage, Sku.storages).filter(OrderLine.order_id==order_id).first()
+        order = cls.query.join(OrderLine, OrderLine.order_id == Order.id).join(
+            Sku, OrderLine.sku_id == Sku.id).join(Storage, Sku.storages).filter(OrderLine.order_id == order_id).first()
         result = list()
 
         if not order:
@@ -39,7 +42,8 @@ class Order(Base):
             for warehouse in warehouses:
                 # If quantity orderd is greater than stock available, use all warehouse stock.
                 if remaining > warehouse.stock:
-                    result.append({"id": warehouse.id, "quantity": warehouse.stock})
+                    result.append(
+                        {"id": warehouse.id, "quantity": warehouse.stock})
                 # Else use all remaining quantity from warehouse
                 else:
                     result.append({"id": warehouse.id, "quantity": remaining})

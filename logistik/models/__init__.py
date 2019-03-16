@@ -4,8 +4,8 @@ from .sku import Sku
 from .storage import Storage
 
 all_models = [
-  Order,
-  OrderLine,
-  Sku,
-  Storage
+    Order,
+    OrderLine,
+    Sku,
+    Storage
 ]
