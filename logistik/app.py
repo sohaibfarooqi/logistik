@@ -1,9 +1,10 @@
 import os
+from functools import partial
 
 from flask import Flask
-from flask_restless import APIManager
-
-from .extentions import api_manager, db, migrate
+from flasgger import swag_from
+from flasgger import Swagger
+from .extentions import api_manager, db, migrate, swagger
 from .models import all_models
 from .views import BASE_PREFIX, blueprints
 
@@ -17,9 +18,10 @@ def init_app():
     settings = os.environ.get("FLASK_SETTING_MODULE",
                               'logistik.settings.DevelopmentSettings')
     app.config.from_object(settings)
-    register_crud_api(app)
-    register_extensions(app)
-    register_blueprints(app)
+    with app.app_context():
+        register_crud_api(app)
+        register_extensions(app)
+        register_blueprints(app)
     return app
 
 
@@ -27,10 +29,10 @@ def register_extensions(app):
     """
     Register all external extentions.
     """
-    with app.app_context():
-        db.init_app(app)
-        migrate.init_app(app, db)
-        api_manager.init_app(app, flask_sqlalchemy_db=db)
+    db.init_app(app)
+    migrate.init_app(app, db)
+    api_manager.init_app(app, flask_sqlalchemy_db=db)
+    swagger.init_app(app)
 
 
 def register_blueprints(app):
