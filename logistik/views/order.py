@@ -1,6 +1,6 @@
 from flask import jsonify, Blueprint
 from .specs import BASE_PREFIX
-from ..exceptions import InsufficientStockError
+from ..exceptions import InsufficientStockError, OrderNotFoundError
 from ..models import Order
 
 bp_order = Blueprint('custom', __name__, url_prefix=BASE_PREFIX)
@@ -33,7 +33,7 @@ def fulfill_order(order_id):
 
   try:
     response = Order.fulfill(order_id)
-  except InsufficientStockError as err:
+  except (InsufficientStockError, OrderNotFoundError) as err:
     status_code = 400
     response = err.to_response()
 
