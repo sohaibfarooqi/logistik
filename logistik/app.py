@@ -18,8 +18,8 @@ def init_app():
                               'logistik.settings.DevelopmentSettings')
     app.config.from_object(settings)
     with app.app_context():
-        register_crud_api(app)
         register_extensions(app)
+        register_crud_api(app)
         register_blueprints(app)
         app.register_error_handler(404, page_not_found)
         app.register_error_handler(500, intenal_server_error)
