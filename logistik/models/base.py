@@ -7,7 +7,8 @@ class Base(db.Model):
     Use this class if all your models share some common code.
     """
     __abstract__ = True
-    _exclude = ()
+    _exclude = () # Attributes to exlude
+
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(

@@ -1,7 +1,7 @@
 from sqlalchemy import UniqueConstraint
 from .base import Base
 from ..extentions import db
-
+from ..schemas import OrderLineSchema
 
 class OrderLine(Base):
     """
@@ -9,6 +9,7 @@ class OrderLine(Base):
     its associated sku and quantity
     """
     _exclude = ('order', 'sku',)
+    _schema_class = OrderLineSchema()
 
     __table_args__ = (UniqueConstraint('sku_id', 'order_id', name='_sku_order_uc'),)
 

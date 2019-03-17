@@ -4,13 +4,15 @@ from .sku import Sku
 from .storage import Storage
 from ..extentions import db
 from ..exceptions import InsufficientStockError, OrderNotFoundError
-
+from ..schemas import OrderSchema
 
 class Order(Base):
     """
     Class definition for Order. Contains attributes associated with order,
     `customer_name`, `order_lines`.
     """
+    _schema_class = OrderSchema()
+
     customer_name = db.Column(db.String, nullable=False)
     order_lines = db.relationship(
         'OrderLine', lazy=True, cascade="all, delete-orphan")
