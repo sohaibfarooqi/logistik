@@ -52,17 +52,5 @@ def register_crud_api(app):
     for model in all_models:
         exclude = model._exclude
         api_manager.create_api(
-            model, methods=http_methods, url_prefix=BASE_PREFIX, exclude_columns=exclude)
-
-def register_errorhandlers(app):
-    """Register error handlers."""
-    def render_error(error):
-        """Render error template."""
-        # If a HTTPException, pull the `code` attribute; default to 500
-        print(error)
-    #     error_code = getattr(error, 'code', 500)
-    #     return render_template('{0}.html'.format(error_code)), error_code
-    # for errcode in [401, 404, 500]:
-    #     app.errorhandler(errcode)(render_error)
-    # return None
-        return jsonify({"Error": 500})
+            model, methods=http_methods, url_prefix=BASE_PREFIX, exclude_columns=exclude,
+            preprocessors={"POST": [model._schema_class.model_deserializer]})
