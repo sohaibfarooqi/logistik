@@ -25,7 +25,7 @@ To run test and generate coverage report use
 To run static analyzers use:
 
  - `bandit -r .`
- - `autopep8 --recursive --in-place campaign`
+ - `autopep8 --recursive --in-place logistik`
  - `isort **/*.py`
 
 ### Data Model:
@@ -103,7 +103,6 @@ The reason to choose above stack is as follows:
 
  - Add more test cases.
  - Create meaningful indexes for query optimization.
- - Add schema validation support with `Marshmallow`.
  - Run load test to plan capacity of system. Load testing can be done using `Apache Workbench`.
  - Package application using Docker.
  - Add authentication support to prevent unauthorized access.
