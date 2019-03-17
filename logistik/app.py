@@ -1,12 +1,11 @@
 import os
 from functools import partial
 
-from flask import Flask
-from flasgger import swag_from
-from flasgger import Swagger
+from flask import Flask, jsonify
 from .extentions import api_manager, db, migrate, swagger
 from .models import all_models
 from .views import BASE_PREFIX, blueprints
+from .error_handlers import page_not_found, intenal_server_error
 
 
 def init_app():
@@ -22,6 +21,8 @@ def init_app():
         register_crud_api(app)
         register_extensions(app)
         register_blueprints(app)
+        app.register_error_handler(404, page_not_found)
+        app.register_error_handler(500, intenal_server_error)
     return app
 
 
@@ -52,3 +53,16 @@ def register_crud_api(app):
         exclude = model._exclude
         api_manager.create_api(
             model, methods=http_methods, url_prefix=BASE_PREFIX, exclude_columns=exclude)
+
+def register_errorhandlers(app):
+    """Register error handlers."""
+    def render_error(error):
+        """Render error template."""
+        # If a HTTPException, pull the `code` attribute; default to 500
+        print(error)
+    #     error_code = getattr(error, 'code', 500)
+    #     return render_template('{0}.html'.format(error_code)), error_code
+    # for errcode in [401, 404, 500]:
+    #     app.errorhandler(errcode)(render_error)
+    # return None
+        return jsonify({"Error": 500})

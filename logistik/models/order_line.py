@@ -1,3 +1,4 @@
+from sqlalchemy import UniqueConstraint
 from .base import Base
 from ..extentions import db
 
@@ -8,6 +9,8 @@ class OrderLine(Base):
     its associated sku and quantity
     """
     _exclude = ('order', 'sku',)
+
+    __table_args__ = (UniqueConstraint('sku_id', 'order_id', name='_sku_order_uc'),)
 
     sku_id = db.Column(db.Integer, db.ForeignKey('sku.id'), nullable=False)
     sku = db.relationship('Sku')
