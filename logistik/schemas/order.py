@@ -1,6 +1,7 @@
 from marshmallow import EXCLUDE, Schema, fields, post_load
 from .base import BaseSchema
 
+
 class OrderSchema(BaseSchema):
     """
     Class definition for Order model schema.

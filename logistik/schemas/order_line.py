@@ -1,6 +1,7 @@
 from marshmallow import EXCLUDE, Schema, fields, post_load
-from  marshmallow.validate import Range
+from marshmallow.validate import Range
 from .base import BaseSchema
+
 
 class OrderLineSchema(BaseSchema):
     """
@@ -16,4 +17,5 @@ class OrderLineSchema(BaseSchema):
 
     order_id = fields.Integer(required=True)
     sku_id = fields.Integer(required=True)
-    quantity = fields.Integer(strict=True, required=True, validate=[Range(min=1, error="Quantity must be positive")])
+    quantity = fields.Integer(strict=True, required=True, validate=[
+                              Range(min=1, error="Quantity must be positive")])

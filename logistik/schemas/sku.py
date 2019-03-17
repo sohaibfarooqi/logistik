@@ -1,6 +1,7 @@
 from marshmallow import EXCLUDE, Schema, fields, post_load
 from .base import BaseSchema
 
+
 class SkuSchema(BaseSchema):
     """
     Class definition for Sku model schema.
