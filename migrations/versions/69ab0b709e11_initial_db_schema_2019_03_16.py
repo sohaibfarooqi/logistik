@@ -1,8 +1,8 @@
-"""initial_db_schema_2019_03_16
+"""initial_db_schema_2019-03-16
 
-Revision ID: 6b8783215f35
+Revision ID: 69ab0b709e11
 Revises: 
-Create Date: 2019-03-16 11:04:08.892338
+Create Date: 2019-03-17 10:44:28.838166
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6b8783215f35'
+revision = '69ab0b709e11'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -55,7 +55,8 @@ def upgrade():
     sa.Column('order_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['order_id'], ['order.id'], ),
     sa.ForeignKeyConstraint(['sku_id'], ['sku.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('sku_id', 'order_id', name='_sku_order_uc')
     )
     # ### end Alembic commands ###
 
