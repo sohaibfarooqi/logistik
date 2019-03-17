@@ -19,14 +19,14 @@ To run the app locally use following commands:
 At this point you will have a copy of app running locally. Access the app at `http://localhost:5000/api/v1.0/order`
 To run test and generate coverage report use
 
- - pytest
- - pytest --cov=logistik tests/
+ - `pytest`
+ - `pytest --cov=logistik tests/`
 
 To run static analyzers use:
 
- - bandit -r .
- - autopep8 --recursive --in-place campaign
- - isort **/*.py
+ - `bandit -r .`
+ - `autopep8 --recursive --in-place campaign`
+ - `isort **/*.py`
 
 ### Data Model:
 This app contains following entities:
@@ -61,6 +61,10 @@ This package also support resource filtering. To get order based on customer nam
 
 Not only simple filtering, this package also supports SQL operators like `and`, `or`, `not` etc.
 
+Flask-Restless package also provides support for serialization and deserialization and schema checking.
+The schema validation is very basic level. It throws error for unknown fields and SQLAlchemy will be able
+to validate datatypes. Error message thrown by this package are also very naive.
+
 ### Custom Endpoints
 All custom endpoints are inside `logistik/views` directory. Currently only one endpoint i.e. `order/<order_id>/fulfill`
 is present. This endpoint check if an order can be fulfiled using current stocks in storage. If order can be fulfiled it returns `storage_id` and `quantity` supplied to fulfil the order. If an order cannot be fulfiled it returns 400.
@@ -69,7 +73,7 @@ is present. This endpoint check if an order can be fulfiled using current stocks
 Continuous integration is setup on master branch using `Travis CI`. Once the build is successful, travis send the test coverage report to `Coverall` and also deploy the code to `Heroku`.
 
 ### Production details
-This app is deployed on `Heroku` platform. The access application use [Base Url](https://logistik-test.herokuapp.com).
+This app is deployed on `Heroku` platform. To access application use [Base Url](https://logistik-test.herokuapp.com).
 To access Swagger UI for custom enpoint use [Swagger UI](https://logistik-test.herokuapp.com/apidocs). To access schema endpoint for CRUD API use [Schema Endpoint](https://logistik-test.herokuapp.com/swagger.json).
 
 ### Tech-stack used
