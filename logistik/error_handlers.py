@@ -10,6 +10,5 @@ def intenal_server_error(error):
   """
   Generic 404 Error handler
   """
-  print(error)
-  return jsonify({"code": 500, "message": "requested URL not found on server"}), 500
+  return jsonify({"code": 500, "message": str(error)}), 500
 
